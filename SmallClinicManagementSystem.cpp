@@ -217,12 +217,7 @@ public:
 
 int main() {
     // Create a list of clinic rooms
-    vector<Room> clinicRooms = {
-        Room("101", "Cardiology", true),
-        Room("102", "Neurology", false),
-        Room("103", "Pediatrics", true),
-        Room("104", "General Medicine", true)
-    };
+    vector<Room> clinicRooms = {Room("101", "Cardiology", true), Room("102", "Neurology", false), Room("103", "Pediatrics", true), Room("104", "General Medicine", true)};
 
     // Role menu
     cout << "Choose your role:\n";
@@ -247,11 +242,12 @@ int main() {
             patient1.displayPatientInfo();
 
             // Function menu
-            cout << "Choose function: ";
+            cout << "Choose function: \n";
             cout << "1. Schedule appointment\n";
             cout << "2. View medical history\n";
             cout << "3. Update medical history\n";
             cout << "4. View room\n";
+            cout << "Your selection: ";
             int n;
             cin >> n;
 
@@ -304,11 +300,13 @@ int main() {
             patient2.displayPatientInfo();
             
             // Function menu
-            cout << "Choose function: ";
+            cout << "Choose function: \n";
             cout << "1. Schedule appointment\n";
             cout << "2. View medical history\n";
             cout << "3. Update medical history\n";
             cout << "4. View room\n";
+            cout << "Your selection: ";
+            int n;
             cin >> n;
             
             switch (n) {
@@ -364,12 +362,13 @@ int main() {
             chronicPatient1.displayPatientInfo();
             
             // Function menu
-            cout << "Choose function: ";
+            cout << "Choose function: \n";
             cout << "1. Schedule appointment\n";
             cout << "2. View medical history\n";
             cout << "3. Update medical history\n";
             cout << "4. Check regular health check-up frequency\n";
             cout << "5. View room\n";
+            cout << "Your selection: ";
             int n;
             cin >> n;
 
@@ -417,13 +416,17 @@ int main() {
             history2.push_back(Appointment("18/7/2025", "13:30", "Kidney Function Test", "Scheduled"));
             ChronicPatients chronicPatient2("Pham Thi Duong", "C002", 60, history2, "Hypertension", "10/7/2025", "Every 6 months");
 
-            // Choose function for chronic patient 2
-            cout << "Choose function: ";
+            // Display chronic patient 2 info
+            chronicPatient2.displayPatientInfo();
+            
+            // Function menu
+            cout << "Choose function: \n";
             cout << "1. Schedule appointment\n";
             cout << "2. View medical history\n";
             cout << "3. Update medical history\n";
             cout << "4. Check regular health check-up frequency\n";
             cout << "5. View room\n";
+            cout << "Your selection: ";
             cin >> n;
 
             switch (n) {
@@ -478,10 +481,11 @@ int main() {
             doctor1.displayDoctorInfo();
             
             // Function menu
-            cout << "Choose function: ";
+            cout << "Choose function:\n";
             cout << "1. View your appointment\n";
             cout << "2. Update appointment status\n";
             cout << "3. Update room status\n";
+            cout << "Your selection: ";
             int n;
             cin >> n;
 
@@ -525,10 +529,11 @@ int main() {
             doctor2.displayDoctorInfo();
 
             // Function menu
-            cout << "Choose function: ";
+            cout << "Choose function:\n";
             cout << "1. View your appointment\n";
             cout << "2. Update appointment status\n";
             cout << "3. Update room status\n";
+            cout << "Your selection: ";
             cin >> n;
 
             switch (n) {
@@ -568,3 +573,88 @@ int main() {
             break;
     }
 }
+/*
+All test case:
+Test case 1:
+- Input:
++ For patient1:
+1 (Role selection)
+2 (Function Selection)
++ For patient2:
+1 (Role selection)
+9/9/2025
+14:00
+Check-up
+- Output:
+Choose your role:
+1. Patient
+2. Chronic Patient
+3. Doctor
+Your selection: 1
+Name: Nguyen Van An
+ID: P001
+Age: 25
+Choose function: 
+1. Schedule appointment
+2. View medical history
+3. Update medical history
+4. View room
+Your selection: 2
+Medical history:
+Appointment 1:
+Date: 7/9/2025
+Time: 10:00
+Reason: Fever
+Status: Completed
+
+Appointment 2:
+Date: 8/9/2025
+Time: 09:00
+Reason: Flu
+Status: Scheduled
+
+Appointment 3:
+Date: 14/8/2025
+Time: 15:00
+Reason: Headache
+Status: Completed
+
+Name: Le Thi Binh
+ID: P002
+Age: 30
+Choose function: 
+1. Schedule appointment
+2. View medical history
+3. Update medical history
+4. View room
+Your selection: 1
+Input informations below:
+Date: 9/9/2025
+Time: 14:00
+Reason: Check-up
+Appointment scheduled successfully!
+Medical history:
+Appointment 1:
+Date: 6/9/2025
+Time: 14:00
+Reason: Cough
+Status: Scheduled
+
+Appointment 2:
+Date: 10/9/2025
+Time: 11:00
+Reason: Fever
+Status: Completed
+
+Appointment 3:
+Date: 12/9/2025
+Time: 16:00
+Reason: Back Pain
+Status: Scheduled
+
+Appointment 4:
+Date: 9/9/2025
+Time: 14:00
+Reason: Check-up
+Status: Scheduled
+*/

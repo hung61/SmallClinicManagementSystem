@@ -10,12 +10,26 @@ class Appointment{
         string time; // Appointment time
         string reason; // Reason for visit
         string status; // Status (Scheduled, Completed, Canceled)
+
+    protected:
     
     public:
         // Constructor for appointment object
         Appointment(string _date, string _time, string _reason, string _status): 
         date(_date), time(_time), reason(_reason), status(_status){}
         
+        // Getter functions
+        string getDate(){return date;} // Get appointment date
+        string getTime(){return time;} // Get appointment time
+        string getReason(){return reason;} // Get reason for visit
+        string getStatus(){return status;} // Get appointment status
+
+        // Setter functions
+        void setDate(string _date){date = _date;} // Change appointment date
+        void setTime(string _time){time = _time;} // Change appointment time
+        void setReason(string _reason){reason = _reason;} // Change reason for visit
+        void setStatus(string _status){status = _status;} // Change appointment status
+
         // Display appointment information
         void displayAppointment(){
             cout << "Date: " << date << endl;
@@ -23,20 +37,12 @@ class Appointment{
             cout << "Reason: " << reason << endl;
             cout << "Status: " << status << endl;
         }
-        
-        // Get appointment date
-        string getDate(){
-            return date;
-        }
-        
-        // Update appointment status
-        void setStatus(string _status){
-            status = _status;
-        }
 };
 
-// Class Patient
+// Class Patients
 class Patients{
+    private:
+    
     protected:
         string name; // Patient name
         string ID; // Patient ID
@@ -47,6 +53,18 @@ class Patients{
         // Constructor for patient object
         Patients(string _name, string _ID, int _age, vector<Appointment> _medicalHistory): 
         name(_name), ID(_ID), age(_age), medicalHistory(_medicalHistory){}
+
+        // Getter functions
+        string getName(){return name;} // Get patient name
+        string getID(){return ID;} // Get patient ID
+        int getAge(){return age;} // Get patient age
+        vector<Appointment> getMedicalHistory(){return medicalHistory;} // Get medical history
+
+        // Setter functions
+        void setName(string _name){name = _name;} // Change patient name
+        void setID(string _ID){ID = _ID;} // Change patient ID
+        void setAge(int _age){age = _age;} // Change patient age
+        void setMedicalHistory(vector<Appointment> _medicalHistory){medicalHistory = _medicalHistory;} // Change medical history
 
         // Display patient information
         virtual void displayPatientInfo(){
@@ -98,28 +116,40 @@ class Patients{
         }   
 };
 
-// Class Chronic Patient
+// Class ChronicPatients
 class ChronicPatients: public Patients{
     private:
         string conditionType; // Type of chronic disease
         string lastCheckUpDate; // Last check-up date
         string frequency; // Check-up frequency
         
+    protected:
+    
     public:
         // Constructor for chronic patient object
         ChronicPatients(string _name, string _ID, int _age, vector<Appointment> _medicalHistory, string _conditionType, string _lastCheckUpDate, string _frequency)
         : Patients(_name, _ID, _age, _medicalHistory), conditionType(_conditionType), lastCheckUpDate(_lastCheckUpDate), frequency(_frequency) {}
 
+        // Getter functions
+        string getConditionType(){return conditionType;}   // Get condition type
+        string getLastCheckUpDate(){return lastCheckUpDate;} // Get last check-up date
+        string getFrequency(){return frequency;} // Get check-up frequency
+
+        // Setter functions
+        void setConditionType(string _conditionType){conditionType = _conditionType;} // Change condition type
+        void setLastCheckUpDate(string _lastCheckUpDate){lastCheckUpDate = _lastCheckUpDate;} // Change last check-up date
+        void setFrequency(string _frequency){frequency = _frequency;} // Change check-up frequency
+        
         // Display chronic patient information
         void displayPatientInfo() override {
-            Patients::displayPatientInfo(); // Call parent class function
+            Patients::displayPatientInfo(); 
             cout << "Condition Type: " << conditionType << endl;
             cout << "Last Check-up Date: " << lastCheckUpDate << endl;
         }
         
         // Schedule appointment for chronic patient
         void scheduleAppointment() override {
-            Patients::scheduleAppointment(); // Call parent class function
+            Patients::scheduleAppointment(); 
             
             cout << "Condition type: ";
             cin >> conditionType;
@@ -142,7 +172,7 @@ class ChronicPatients: public Patients{
         }
 };
 
-// Class Doctor
+// Class Doctors
 class Doctors{
     private:
         string name; // Doctor name
@@ -150,11 +180,25 @@ class Doctors{
         string specialty; // Specialty
         vector<Appointment> assignedAppointments; // List of assigned appointments
 
+    protected:
+    
     public:
         // Constructor for doctor object
         Doctors(string _name, string _ID, string _specialty, vector<Appointment> _assignedAppointments): 
         name(_name), ID(_ID), specialty(_specialty), assignedAppointments(_assignedAppointments){}
         
+        // Getter functions
+        string getName(){return name;} // Get doctor name
+        string getID(){return ID;} // Get doctor ID
+        string getSpecialty(){return specialty;} // Get specialty
+        vector<Appointment> getAssignedAppointments(){return assignedAppointments;} // Get assigned appointments
+
+        // Setter functions
+        void setName(string _name){name = _name;} // Change doctor name
+        void setID(string _ID){ID = _ID;} // Change doctor ID
+        void setSpecialty(string _specialty){specialty = _specialty;} // Change specialty
+        void setAssignedAppointments(vector<Appointment> _assignedAppointments){assignedAppointments = _assignedAppointments;} // Change assigned appointments
+
         // Display doctor information
         void displayDoctorInfo(){
             cout << "Doctor Name: " << name << endl;
@@ -200,6 +244,17 @@ public:
     Room(string _roomNumber, string _department, bool _available = true):
     roomNumber(_roomNumber), department(_department), available(_available) {}
 
+    // Getter functions
+    string getRoomNumber(){return roomNumber;} // Get room number
+    string getDepartment(){return department;} // Get department
+    bool isAvailable(){return available;} // Get availability status
+
+    // Setter functions
+    void setRoomNumber(string _roomNumber){roomNumber = _roomNumber;} // Set room number
+    void setDepartment(string _department){department = _department;} // Set department
+    void setAvailability(bool status) { available = status; } // Set availability
+
+
     // Display room information
     void displayRoomInfo() {
         cout << "Room Number: " << roomNumber << endl;
@@ -207,11 +262,6 @@ public:
         cout << "Available: ";
         if (available) cout << "Yes\n";
         else cout << "No\n"; 
-    }
-    
-    // Update room status
-    void setAvailability(bool status) {
-        available = status;
     }
 };
 
@@ -231,14 +281,14 @@ int main() {
     switch (mode) {
         // Patient
         case 1: { 
-            // Create patient 1 with medical history
+            // Create patient1 with medical history
             vector<Appointment> history1;
             history1.push_back(Appointment("7/9/2025", "10:00", "Fever", "Completed"));
             history1.push_back(Appointment("8/9/2025", "09:00", "Flu", "Scheduled"));
             history1.push_back(Appointment("14/8/2025", "15:00", "Headache", "Completed"));
             Patients patient1("Nguyen Van An", "P001", 25, history1);
 
-            // Display patient 1 info
+            // Display patient1 info
             patient1.displayPatientInfo();
 
             // Function menu
@@ -289,14 +339,14 @@ int main() {
                 }
             }
 
-            // Create patient 2 with medical history
+            // Create patient2 with medical history
             vector<Appointment> history2;
             history2.push_back(Appointment("6/9/2025", "14:00", "Cough", "Scheduled"));
             history2.push_back(Appointment("10/9/2025", "11:00", "Fever", "Completed"));
             history2.push_back(Appointment("12/9/2025", "16:00", "Back Pain", "Scheduled"));
             Patients patient2("Le Thi Binh", "P002", 30, history2);
 
-            // Display patient 2 info
+            // Display patient2 info
             patient2.displayPatientInfo();
             
             // Function menu
@@ -351,14 +401,14 @@ int main() {
 
         // Chronic patient
         case 2: { 
-            // Create chronic patient 1 with medical history
+            // Create chronicPatient1 with medical history
             vector<Appointment> history1;
             history1.push_back(Appointment("20/8/2025", "09:00", "Diabetes Checkup", "Completed"));
             history1.push_back(Appointment("22/8/2025", "10:30", "Blood Test", "Completed"));
             history1.push_back(Appointment("25/8/2025", "08:30", "Eye Check", "Scheduled"));
             ChronicPatients chronicPatient1("Tran Van Cuong", "C001", 50, history1, "Diabetes", "20/8/2025", "Every 3 months");
             
-            // Display chronic patient 1 info
+            // Display chronicPatient1 info
             chronicPatient1.displayPatientInfo();
             
             // Function menu
@@ -373,28 +423,33 @@ int main() {
             cin >> n;
 
             switch (n) {
+                // Schedule a new appointment
                 case 1: {
                     chronicPatient1.scheduleAppointment();
                     chronicPatient1.viewMedicalHistory();
                     break;
                 }
                 
+                // View medical history
                 case 2: {
                     chronicPatient1.viewMedicalHistory();
                     break;
                 }
 
+                // Delete appointment from history
                 case 3: {
                     chronicPatient1.updateMedicalHistory();
                     chronicPatient1.viewMedicalHistory();
                     break;
                 }
 
+                // Check regular health check-up frequency
                 case 4: {
                     chronicPatient1.checkFrequency();
                     break;
                 }
 
+                // View clinic rooms
                 case 5: {
                     for (int i = 0; i < clinicRooms.size(); i++){
                         clinicRooms[i].displayRoomInfo();
@@ -403,20 +458,21 @@ int main() {
                     break;
                 }
 
+                // Error case
                 default: {
                     cout << "Invalid\n";
                     break;
                 }
             }
 
-            // Create chronic patient 2 with medical history
+            // Create chronicPatient2 with medical history
             vector<Appointment> history2;
             history2.push_back(Appointment("10/7/2025", "15:00", "Hypertension Checkup", "Completed"));
             history2.push_back(Appointment("12/7/2025", "09:00", "ECG Test", "Completed"));
             history2.push_back(Appointment("18/7/2025", "13:30", "Kidney Function Test", "Scheduled"));
             ChronicPatients chronicPatient2("Pham Thi Duong", "C002", 60, history2, "Hypertension", "10/7/2025", "Every 6 months");
 
-            // Display chronic patient 2 info
+            // Display chronicPatient2 info
             chronicPatient2.displayPatientInfo();
             
             // Function menu
@@ -430,28 +486,33 @@ int main() {
             cin >> n;
 
             switch (n) {
+                // Schedule a new appointment
                 case 1: {
                     chronicPatient2.scheduleAppointment();
                     chronicPatient2.viewMedicalHistory();
                     break;
                 }
                 
+                // View medical history
                 case 2: {
                     chronicPatient2.viewMedicalHistory();
                     break;
                 }
 
+                // Delete appointment from history
                 case 3: {
                     chronicPatient2.updateMedicalHistory();
                     chronicPatient2.viewMedicalHistory();
                     break;
                 }
 
+                // Check regular health check-up frequency
                 case 4: {
                     chronicPatient2.checkFrequency();
                     break;
                 }
 
+                // View clinic rooms
                 case 5: {
                     for (int i = 0; i < clinicRooms.size(); i++){
                         clinicRooms[i].displayRoomInfo();
@@ -460,6 +521,7 @@ int main() {
                     break;
                 }
 
+                // Error case
                 default: {
                     cout << "Invalid\n";
                     break;
@@ -470,14 +532,14 @@ int main() {
 
         // Doctor
         case 3: { 
-            // Create doctor 1 with assigned appointments
+            // Create doctor1 with assigned appointments
             vector<Appointment> doctorApp1;
             doctorApp1.push_back(Appointment("15/8/2025", "10:00", "Fever", "Completed"));
             doctorApp1.push_back(Appointment("16/8/2025", "11:00", "Allergy", "Scheduled"));
             doctorApp1.push_back(Appointment("17/8/2025", "09:30", "Stomach Ache", "Completed"));
             Doctors doctor1("Tran Van Anh", "D001", "Cardiology", doctorApp1);
 
-            // Display doctor 1 info
+            // Display doctor1 info
             doctor1.displayDoctorInfo();
             
             // Function menu
@@ -490,17 +552,20 @@ int main() {
             cin >> n;
 
             switch (n) {
-                case 1: { // View assigned appointments
+                // View assigned appointments
+                case 1: { 
                     doctor1.viewAssignedAppointments();
                     break;
                 }
                 
-                case 2: { // Update appointment status
+                // Update appointment status
+                case 2: { 
                     doctor1.updateStatus(); 
                     break;
                 }
 
-                case 3: { // Update clinic room availability
+                // Update clinic room availability
+                case 3: { 
                     clinicRooms[0].displayRoomInfo();
                     cout << "Status: ";
                     string status;
@@ -512,20 +577,21 @@ int main() {
                     break;
                 }
 
+                // Error case
                 default: {
                     cout << "Invalid\n";
                     break;
                 }
             }
 
-            // Create doctor 2 with assigned appointments
+            // Create doctor2 with assigned appointments
             vector<Appointment> doctorApp2;
             doctorApp2.push_back(Appointment("19/8/2025", "14:00", "Cough", "Scheduled"));
             doctorApp2.push_back(Appointment("20/8/2025", "15:00", "Fever", "Completed"));
             doctorApp2.push_back(Appointment("21/8/2025", "10:30", "General Checkup", "Scheduled"));
             Doctors doctor2("Le Thi Hoa", "D002", "Pediatrics", doctorApp2);
 
-            // Display doctor 2 info
+            // Display doctor2 info
             doctor2.displayDoctorInfo();
 
             // Function menu
@@ -537,28 +603,32 @@ int main() {
             cin >> n;
 
             switch (n) {
+                // View assigned appointments
                 case 1: {
                     doctor2.viewAssignedAppointments();
                     break;
                 }
                 
+                // Update appointment status
                 case 2: {
                     doctor2.updateStatus(); 
                     break;
                 }
 
+                // Update clinic room availability
                 case 3: {
-                    clinicRooms[0].displayRoomInfo();
+                    clinicRooms[2].displayRoomInfo();
                     cout << "Status: ";
                     string status;
                     if (status == "Yes" || status == "No"){
-                        if (status == "Yes") clinicRooms[0].setAvailability(true);
-                        else clinicRooms[0].setAvailability(false);
+                        if (status == "Yes") clinicRooms[2].setAvailability(true);
+                        else clinicRooms[2].setAvailability(false);
                         cout << "Update room status sucessful!\n";
                     } else cout << "Invalid\n";
                     break;
                 }
 
+                // Error case
                 default: {
                     cout << "Invalid\n";
                     break;
@@ -568,6 +638,7 @@ int main() {
             break;
         }
 
+        // Error case when input invalid number
         default:
             cout << "Invalid\n";
             break;
